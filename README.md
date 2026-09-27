@@ -67,6 +67,24 @@ python run.py hybrid --data /path/to/docs -q "..."
 pytest   # offline tests for all 14 pipelines
 ```
 
+## Running in GitHub Actions
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| [`ci.yml`](.github/workflows/ci.yml) | every push and pull request | runs `pytest` and all 14 flows with the mock LLM on Python 3.11 and 3.12. Needs no secrets |
+| [`run-rag.yml`](.github/workflows/run-rag.yml) | manual (**Actions → Run RAG flows → Run workflow**) | runs the RAG types and question you choose, in `mock` or `live` mode |
+
+To use `live` mode, add your key once: **Settings → Secrets and variables → Actions → New repository secret**, with name `ANTHROPIC_API_KEY`. A live run fails immediately if the secret is missing, rather than falling back to the mock.
+
+Each run posts a results table and every answer to the run's **Summary** page. The manual workflow also uploads `report.md` as a downloadable `rag-report` artifact.
+
+The same thing works locally:
+
+```bash
+python run.py all --mock --report report.md
+python run.py naive hybrid --live -q "Who founded Nimbus?"
+```
+
 ## Configuration
 
 | Env var | Default | Meaning |
