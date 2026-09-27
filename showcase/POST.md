@@ -1,8 +1,10 @@
-# LinkedIn post: RAG-1
+# RAG-1 showcase post
 
-## Main post (paste as-is)
+Post text to use with the slides (`slide1-3.png` or `RAG-1-carousel.pdf`).
 
-I built 14 different RAG systems in one repo, so you don't have to guess which one you need. 🧵
+## Full version
+
+I built 14 different RAG systems in one project, to learn which one fits which problem. 🧵
 
 "Just add RAG" sounds simple, but there isn't one RAG. There are more than a dozen patterns, and each fixes a different failure mode. To really understand them, I implemented every major one side by side in Python.
 
@@ -38,47 +40,26 @@ How it's built:
 ✅ Claude for generation: structured outputs, tool use, web search, citations
 ✅ Runs fully offline with a mock LLM, with 19 tests covering all 14 pipelines
 
-My biggest takeaway: fix retrieval before you touch the prompt or the model. If the right chunk never reaches the LLM, no prompt can save the answer.
+Rule of thumb: fix retrieval before you touch the prompt or the model. If the right chunk never reaches the LLM, no prompt can save the answer.
 
-Swipe through the carousel for the architecture and a "which RAG, when?" cheat sheet ➡️
+The slides cover the architecture and a "which RAG, when?" cheat sheet ➡️
 
-🔗 Code: github.com/shivachikkula/RAG-1
+Which RAG pattern has worked best for you? 👇
 
-Which RAG pattern has worked best for you in production? 👇
-
-#RAG #GenerativeAI #LLM #AIEngineering #Python #MachineLearning #Claude #OpenSource
+#RAG #GenerativeAI #LLM #AIEngineering #Python #MachineLearning
 
 ---
 
-## Shorter version (if you prefer brevity)
+## Short version
 
 There isn't one "RAG". There are more than a dozen patterns, each fixing a different failure mode.
 
-So I built 14 of them side by side in one Python repo: Naive, Hybrid, Advanced, Multi-Query, HyDE, Parent-Document, Contextual Retrieval, Conversational, Corrective, Self-RAG, Adaptive, Agentic, Graph and Citation RAG.
+So I built 14 of them side by side in Python: Naive, Hybrid, Advanced, Multi-Query, HyDE, Parent-Document, Contextual Retrieval, Conversational, Corrective, Self-RAG, Adaptive, Agentic, Graph and Citation RAG.
 
 Every pattern is a runnable project on a shared core. It uses Claude for generation and runs fully offline for testing.
 
-Takeaway: fix retrieval before you touch the prompt.
+Rule of thumb: fix retrieval before you touch the prompt.
 
-📑 Architecture + a "which RAG, when?" cheat sheet in the carousel
-🔗 github.com/shivachikkula/RAG-1
+📑 Architecture + a "which RAG, when?" cheat sheet in the slides.
 
 #RAG #GenerativeAI #LLM #AIEngineering #Python
-
----
-
-## First comment (post right after publishing, since links in comments often get more reach)
-
-Repo: https://github.com/shivachikkula/RAG-1
-Start with rag_types/01_naive_rag, then compare types:
-python run.py naive hybrid graph -q "your question"
-
----
-
-## Posting checklist
-
-1. Make the GitHub repo **public** first, or the link will 404 for readers.
-2. Upload `RAG-1-carousel.pdf` as a **document** post: Start a post → "+" → Add a document. It shows as a swipeable carousel. Give it a title like "14 ways to build RAG".
-   - Or attach `slide1.png` as a single image post.
-3. Paste the main post text.
-4. Add the first comment with the link.
