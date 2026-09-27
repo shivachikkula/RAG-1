@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><style>
+.arch{margin-top:44px;display:flex;flex-direction:column;align-items:stretch;gap:0}
+.layer{border-radius:18px;padding:26px 28px;border:2px solid var(--line);background:var(--card)}
+.layer h3{font-size:25px;font-weight:800;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:baseline}
+.layer h3 .mono{font-size:17px;font-weight:500;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-size:16px;font-weight:600;padding:7px 12px;border-radius:999px;background:var(--bg);border:1.5px solid var(--line)}
+.down{align-self:center;height:48px;width:3px;background:var(--muted);position:relative;margin:2px 0}
+.down:after{content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);border:9px solid transparent;border-top:12px solid var(--muted);border-bottom:0}
+.pipes{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
+.pipe{font:700 13px 'JetBrains Mono',monospace;text-align:center;padding:9px 2px;border-radius:9px;color:#fff}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dark .chip{background:#2A2E38;border-color:#3A3F4B;color:#fff}
+.dark h3 .mono{color:#A9AFBD}
+.note{font-size:16px;color:var(--muted);margin-top:8px;line-height:1.35}
+.dark .note{color:#C3C8D4}
+</style></head><body>
+<div class="kicker">Architecture</div>
+<h1>One shared core,<br>14 pluggable pipelines</h1>
+<div class="sub">Every pattern implements the same interface: <span class="mono">index(docs)</span> and <span class="mono">query(q) → answer + sources</span>.</div>
+<div class="arch">
+ <div class="layer"><h3>Your documents <span class="mono">.md · .txt</span></h3>
+  <div class="chips"><span class="chip">Loaders</span><span class="chip">Fixed chunking</span><span class="chip">Sentence chunking + overlap</span><span class="chip">Parent / child chunks</span></div></div>
+ <div class="down"></div>
+ <div class="layer"><h3>rag_core <span class="mono">shared building blocks</span></h3>
+  <div class="chips"><span class="chip">Embeddings (pluggable)</span><span class="chip">Vector store · cosine</span><span class="chip">BM25 keyword index</span><span class="chip">Reciprocal Rank Fusion</span><span class="chip">Grounded-answer prompt</span></div></div>
+ <div class="down"></div>
+ <div class="layer"><h3>rag_types/ <span class="mono">14 runnable projects</span></h3>
+  <div class="pipes">
+   <div class="pipe" style="background:var(--c1)">Naive</div><div class="pipe" style="background:var(--c2)">Adv.</div><div class="pipe" style="background:var(--c1)">Hybrid</div><div class="pipe" style="background:var(--c2)">Multi-Q</div><div class="pipe" style="background:var(--c2)">HyDE</div><div class="pipe" style="background:var(--c1)">Parent</div><div class="pipe" style="background:var(--c3)">Context</div>
+   <div class="pipe" style="background:var(--c2)">Convo</div><div class="pipe" style="background:var(--c4)">CRAG</div><div class="pipe" style="background:var(--c4)">Self</div><div class="pipe" style="background:var(--c4)">Adaptive</div><div class="pipe" style="background:var(--c5)">Agentic</div><div class="pipe" style="background:var(--c3)">Graph</div><div class="pipe" style="background:var(--c5)">Citation</div>
+  </div></div>
+ <div class="down"></div>
+ <div class="split">
+  <div class="layer dark"><h3>Claude <span class="mono">Anthropic SDK</span></h3>
+   <div class="chips"><span class="chip">Structured outputs</span><span class="chip">Tool use</span><span class="chip">Web search</span><span class="chip">Citations</span><span class="chip">Prompt caching</span></div></div>
+  <div class="layer"><h3>Mock LLM <span class="mono">offline</span></h3>
+   <div class="note">No API key? Every pipeline still runs, deterministic and testable.<br><br><b>19 offline tests</b> cover all 14 pipelines, no network needed.</div></div>
+ </div>
+</div>
+<div class="foot"><span><b>RAG-1</b> · 14 RAG patterns in Python</span><span>2 / 3 →</span></div>
+</body></html>

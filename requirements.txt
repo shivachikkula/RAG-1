@@ -1,0 +1,5 @@
+anthropic>=1.0
+numpy>=1.26
+# Optional: better embeddings than the built-in hashing embedder
+# sentence-transformers>=3.0
+pytest>=8.0

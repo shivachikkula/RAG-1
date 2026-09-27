@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><style>
+table{width:100%;border-collapse:separate;border-spacing:0 12px;margin-top:32px}
+td{background:var(--card);padding:17px 20px;font-size:20px;border-top:2px solid var(--line);border-bottom:2px solid var(--line)}
+td:first-child{border-left:2px solid var(--line);border-radius:14px 0 0 14px;width:56%;line-height:1.3}
+td:last-child{border-right:2px solid var(--line);border-radius:0 14px 14px 0;font-weight:800}
+.tag{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:10px;vertical-align:1px}
+.arr{color:var(--muted);font-weight:500;padding:0 6px}
+.lesson{margin-top:18px;background:var(--ink);color:#fff;border-radius:18px;padding:22px 26px;font-size:21px;line-height:1.45}
+.lesson b{color:#FFD58A}
+</style></head><body>
+<div class="kicker">Cheat sheet</div>
+<h1>Which RAG, when?</h1>
+<div class="sub">Start simple and measure. Add complexity only where the baseline fails.</div>
+<table>
+<tr><td>Just getting started / need a benchmark</td><td><span class="tag" style="background:var(--c1)"></span>Naive</td></tr>
+<tr><td>Exact terms: product codes, IDs, error codes</td><td><span class="tag" style="background:var(--c1)"></span>Hybrid</td></tr>
+<tr><td>Vague or chatty user questions</td><td><span class="tag" style="background:var(--c2)"></span>Advanced · Multi-Query</td></tr>
+<tr><td>Short questions, very different doc wording</td><td><span class="tag" style="background:var(--c2)"></span>HyDE</td></tr>
+<tr><td>Chunks mean nothing on their own ("it", "the plan")</td><td><span class="tag" style="background:var(--c3)"></span>Contextual · Parent-Doc</td></tr>
+<tr><td>Follow-up questions in a chat</td><td><span class="tag" style="background:var(--c2)"></span>Conversational</td></tr>
+<tr><td>Hallucinations are expensive</td><td><span class="tag" style="background:var(--c4)"></span>Corrective · Self-RAG</td></tr>
+<tr><td>Mixed simple + complex traffic</td><td><span class="tag" style="background:var(--c4)"></span>Adaptive</td></tr>
+<tr><td>"Who designed the thing that X uses?"</td><td><span class="tag" style="background:var(--c3)"></span>Graph · Agentic</td></tr>
+<tr><td>Users must verify every claim</td><td><span class="tag" style="background:var(--c5)"></span>Citation</td></tr>
+</table>
+<div class="lesson">Rule of thumb: <b>fix retrieval before touching the prompt or the model.</b> If the right chunk never reaches the LLM, no amount of prompting can save the answer.</div>
+<div class="foot"><span><b>RAG-1</b> · 14 RAG patterns in Python</span><span>3 / 3</span></div>
+</body></html>
