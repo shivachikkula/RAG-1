@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><style>
+.flow{display:flex;align-items:center;gap:10px;margin-top:40px}
+.step{flex:1;background:var(--ink);color:#fff;border-radius:14px;padding:14px 10px;text-align:center;font-weight:700;font-size:21px}
+.step small{display:block;font-weight:500;font-size:15px;opacity:.7;margin-top:3px}
+.arrow{font-size:26px;color:var(--muted);font-weight:700}
+.families{display:flex;flex-direction:column;gap:18px;margin-top:40px}
+.fam{display:grid;grid-template-columns:210px 1fr;gap:14px;align-items:stretch}
+.fam-label{border-radius:14px;padding:14px 16px;color:#fff;font-weight:800;font-size:20px;line-height:1.15;display:flex;flex-direction:column;justify-content:center}
+.fam-label span{font-weight:500;font-size:14px;opacity:.9;margin-top:5px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:18px 16px}
+.card .n{font:700 14px 'JetBrains Mono',monospace}
+.card .t{font-weight:800;font-size:21px;margin-top:3px;letter-spacing:-.01em}
+.card .d{font-size:15.5px;color:var(--muted);margin-top:4px;line-height:1.3}
+</style></head><body>
+<div class="kicker">Open-source · Python · Claude</div>
+<h1>14 ways to build <em>RAG</em>,<br>one repo</h1>
+<div class="sub">Every major Retrieval-Augmented Generation pattern, each a runnable project on a shared core.</div>
+<div class="flow">
+  <div class="step">Question</div><div class="arrow">→</div>
+  <div class="step">Retrieve<small>find evidence</small></div><div class="arrow">→</div>
+  <div class="step">Augment<small>build context</small></div><div class="arrow">→</div>
+  <div class="step">Generate<small>grounded answer</small></div>
+</div>
+<div class="families">
+ <div class="fam"><div class="fam-label" style="background:var(--c1)">Retrieval<span>How we search</span></div>
+  <div class="cards">
+   <div class="card"><div class="n" style="color:var(--c1)">01</div><div class="t">Naive</div><div class="d">chunk → embed → top-k</div></div>
+   <div class="card"><div class="n" style="color:var(--c1)">03</div><div class="t">Hybrid</div><div class="d">BM25 + vectors, RRF</div></div>
+   <div class="card"><div class="n" style="color:var(--c1)">06</div><div class="t">Parent-Doc</div><div class="d">match small, return big</div></div>
+  </div></div>
+ <div class="fam"><div class="fam-label" style="background:var(--c2)">Query<span>Ask better questions</span></div>
+  <div class="cards">
+   <div class="card"><div class="n" style="color:var(--c2)">02</div><div class="t">Advanced</div><div class="d">rewrite + rerank</div></div>
+   <div class="card"><div class="n" style="color:var(--c2)">04</div><div class="t">Multi-Query</div><div class="d">N variants, fused</div></div>
+   <div class="card"><div class="n" style="color:var(--c2)">05</div><div class="t">HyDE</div><div class="d">search with a draft answer</div></div>
+   <div class="card"><div class="n" style="color:var(--c2)">08</div><div class="t">Conversational</div><div class="d">memory + condensing</div></div>
+  </div></div>
+ <div class="fam"><div class="fam-label" style="background:var(--c3)">Indexing<span>Store knowledge smarter</span></div>
+  <div class="cards">
+   <div class="card"><div class="n" style="color:var(--c3)">07</div><div class="t">Contextual</div><div class="d">LLM context per chunk</div></div>
+   <div class="card"><div class="n" style="color:var(--c3)">13</div><div class="t">Graph RAG</div><div class="d">entities + relations</div></div>
+  </div></div>
+ <div class="fam"><div class="fam-label" style="background:var(--c4)">Self-correcting<span>Check before answering</span></div>
+  <div class="cards">
+   <div class="card"><div class="n" style="color:var(--c4)">09</div><div class="t">Corrective</div><div class="d">grade → web fallback</div></div>
+   <div class="card"><div class="n" style="color:var(--c4)">10</div><div class="t">Self-RAG</div><div class="d">critique + retry</div></div>
+   <div class="card"><div class="n" style="color:var(--c4)">11</div><div class="t">Adaptive</div><div class="d">route by complexity</div></div>
+  </div></div>
+ <div class="fam"><div class="fam-label" style="background:var(--c5)">Agents &amp; trust<span>Autonomy + proof</span></div>
+  <div class="cards">
+   <div class="card"><div class="n" style="color:var(--c5)">12</div><div class="t">Agentic</div><div class="d">LLM drives search via tools</div></div>
+   <div class="card"><div class="n" style="color:var(--c5)">14</div><div class="t">Citation</div><div class="d">verifiable quoted sources</div></div>
+  </div></div>
+</div>
+<div class="foot"><span><b>RAG-1</b> · github.com/shivachikkula/RAG-1</span><span>1 / 3 →</span></div>
+</body></html>
