@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Official Anthropic SDK: provides the Claude IChatClient -->
+    <PackageReference Include="Anthropic" Version="12.51.0" />
+    <!-- Microsoft Agent Framework: ChatClientAgent, AgentSession, tools -->
+    <PackageReference Include="Microsoft.Agents.AI" Version="1.23.0" />
+  </ItemGroup>
+
+</Project>
