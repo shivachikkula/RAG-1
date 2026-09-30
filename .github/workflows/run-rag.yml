@@ -13,6 +13,11 @@ on:
         description: Question to ask
         default: How long does the Stratus S1 battery last?
         required: true
+      implementation:
+        description: Which version of the code to run
+        type: choice
+        options: [python, dotnet]
+        default: python
       mode:
         description: mock = offline, live = call Claude
         type: choice
@@ -29,10 +34,16 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
+        if: inputs.implementation == 'python'
         with:
           python-version: "3.12"
           cache: pip
-      - run: pip install -r requirements.txt
+      - if: inputs.implementation == 'python'
+        run: pip install -r requirements.txt
+      - uses: actions/setup-dotnet@v5
+        if: inputs.implementation == 'dotnet'
+        with:
+          dotnet-version: "10.0.x"
       - name: Run RAG flows
         # Inputs are passed through env vars, never interpolated into the script,
         # so a crafted question can't inject shell commands.
@@ -40,10 +51,15 @@ jobs:
           RAG_TYPES: ${{ inputs.rag_types }}
           QUESTION: ${{ inputs.question }}
           MODE: ${{ inputs.mode }}
+          IMPLEMENTATION: ${{ inputs.implementation }}
           ANTHROPIC_API_KEY: ${{ inputs.mode == 'live' && secrets.ANTHROPIC_API_KEY || '' }}
         run: |
           set -f  # no globbing when splitting RAG_TYPES into words
-          python run.py $RAG_TYPES --question "$QUESTION" --"$MODE" --report report.md
+          if [ "$IMPLEMENTATION" = dotnet ]; then
+            dotnet run --project dotnet/src/RagApp -- $RAG_TYPES --question "$QUESTION" --"$MODE" --report report.md
+          else
+            python run.py $RAG_TYPES --question "$QUESTION" --"$MODE" --report report.md
+          fi
       - name: Publish job summary
         if: always()
         run: test -f report.md && cat report.md >> "$GITHUB_STEP_SUMMARY" || true

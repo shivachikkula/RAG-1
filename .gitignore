@@ -3,3 +3,9 @@ __pycache__/
 .venv/
 .env
 .pytest_cache/
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/

@@ -40,6 +40,9 @@ RAG-1/
 | 13 | [Graph](rag_types/13_graph_rag) | LLM-built knowledge graph traversal | relationship and multi-hop questions |
 | 14 | [Citation](rag_types/14_citation_rag) | Claude's native document citations | verifiable, compliance-grade answers |
 
+> **Prefer C#?** The [`dotnet/`](dotnet) folder has the same 14 RAG types in .NET 10, built with
+> Microsoft Agent Framework. Its README explains how to run it and walks through the code.
+
 A rough progression: **01 → 02/03** (better retrieval) → **04–07** (better queries and chunks) → **08** (memory) → **09–11** (self-correction and routing) → **12–13** (agents and graphs) → **14** (verifiability).
 
 ## Quick start
