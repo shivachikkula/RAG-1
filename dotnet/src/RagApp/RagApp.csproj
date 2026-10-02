@@ -9,6 +9,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RagTypes\RagTypes.csproj" />
+    <!-- Built together with this app so the 'students' command can start it; not referenced as a library. -->
+    <ProjectReference Include="..\StudentMcpServer\StudentMcpServer.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- MCP client, used by the 'students' command to connect to the student MCP server -->
+    <PackageReference Include="ModelContextProtocol" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

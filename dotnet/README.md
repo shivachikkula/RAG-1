@@ -25,7 +25,8 @@ dotnet run --project src/RagApp -- naive                      # run one type (of
 dotnet run --project src/RagApp -- hybrid graph -q "Who designed Cirrus?"
 dotnet run --project src/RagApp -- all --report report.md     # run all 14, save a summary
 dotnet run --project src/RagApp -- chat                       # chat with conversational RAG
-dotnet test                                                   # run the 26 tests
+dotnet run --project src/RagApp -- students                   # an agent using the Student MCP server
+dotnet test                                                   # run all tests
 ```
 
 The `--` separates `dotnet run`'s own options from the app's options. The first run downloads
@@ -66,8 +67,11 @@ dotnet/
 │   ├── RagTypes/                one folder per RAG type
 │   │   ├── 01_NaiveRag/ ... 14_CitationRag/
 │   │   └── RagRegistry.cs       name -> RAG type
-│   └── RagApp/Program.cs        the command-line app
-└── tests/RagTests/              xUnit tests
+│   ├── RagApp/Program.cs        the command-line app
+│   └── StudentMcpServer/        MCP server: student database, files and a web API
+└── tests/
+    ├── RagTests/                xUnit tests for the RAG types
+    └── StudentMcpServer.Tests/  xUnit tests for the MCP server
 ```
 
 Every RAG type is a class with two methods:
@@ -148,7 +152,15 @@ the underlying Anthropic request:
 `tests/RagTests/ClaudeRequestTests.cs` checks all four by capturing the real HTTP requests with a
 fake handler, so it needs no API key.
 
-## 7. Embeddings
+## 7. Student MCP server
+
+`src/StudentMcpServer` is a separate project: an **MCP server** that lets AI apps such as Claude
+Desktop, Claude Code or an Agent Framework agent look up students. It reads from three sources:
+a SQLite database (students, courses, grades), file storage (each student's documents) and an
+external web API (Open Library textbook search). See
+[its README](src/StudentMcpServer/README.md) for the tools and how to connect it to Claude.
+
+## 8. Embeddings
 
 Claude has no embeddings endpoint. `HashingEmbeddingGenerator` is a simple offline embedder
 that's good enough for learning and tests. It implements the standard
