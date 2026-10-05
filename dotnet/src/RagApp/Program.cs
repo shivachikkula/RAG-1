@@ -4,6 +4,7 @@
 //   dotnet run --project src/RagApp -- naive hybrid graph -q "Who designed Cirrus?"
 //   dotnet run --project src/RagApp -- all --mock --report report.md
 //   dotnet run --project src/RagApp -- chat
+//   dotnet run --project src/RagApp -- students --live -q "How is Aisha Khan doing?"
 
 using System.Diagnostics;
 using System.Text;
@@ -11,7 +12,7 @@ using RagCore;
 using RagTypes;
 
 var types = new List<string>();
-var question = "How long does the Stratus S1 battery last?";
+string? question = null;
 string? dataDir = null, reportPath = null;
 var mode = LlmMode.Auto;
 
@@ -52,6 +53,9 @@ var docs = DocumentLoader.LoadDirectory(dataDir ?? DocumentLoader.FindSampleData
 
 if (types is ["chat"])
     return await ChatAsync();
+if (types is ["students"])
+    return await StudentAgentDemo.RunAsync(llm, question ?? StudentAgentDemo.DefaultQuestion);
+question ??= "How long does the Stratus S1 battery last?";
 
 if (types is ["all"])
     types = [.. RagRegistry.All.Keys];
@@ -116,6 +120,7 @@ static void PrintHelp() => Console.WriteLine("""
 
       list               show the 14 RAG types
       chat               interactive conversational RAG
+      students           an agent using the Student MCP server's tools
       all | <type> ...   run one or more RAG types on a question
 
     Options:

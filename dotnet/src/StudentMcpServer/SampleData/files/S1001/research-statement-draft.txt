@@ -1,0 +1,5 @@
+Draft research statement - Aisha Khan
+
+I want to study how machine learning models can be made more reliable when the data they see
+changes over time. In CS201 I built a small project comparing sorting algorithms, which taught
+me to measure carefully before drawing conclusions. I hope to bring that habit to research.
