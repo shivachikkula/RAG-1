@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using StudentMcpServer.Data;
 using StudentMcpServer.ExternalApi;
 using StudentMcpServer.Prompts;
@@ -43,7 +44,7 @@ public static class StudentServerSetup
     public static IMcpServerBuilder AddStudentMcpServer(this IServiceCollection services, StudentMcpOptions options, Action<IHttpClientBuilder>? configureHttp = null)
     {
         services.AddSingleton(new StudentDatabase(options.DatabasePath));
-        services.AddSingleton(new StudentFileStore(options.FilesPath));
+        services.AddSingleton(sp => new StudentFileStore(options.FilesPath, sp.GetRequiredService<ILogger<StudentFileStore>>()));
 
         var http = services.AddHttpClient<TextbookApiClient>(client =>
         {

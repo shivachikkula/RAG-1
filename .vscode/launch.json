@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Student MCP: interactive console",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build dotnet",
+      "program": "${workspaceFolder}/dotnet/src/StudentMcpServer/bin/Debug/net10.0/StudentMcpServer.dll",
+      "args": ["--console"],
+      "cwd": "${workspaceFolder}/dotnet",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Student MCP: agent demo (RagApp students)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build dotnet",
+      "program": "${workspaceFolder}/dotnet/src/RagApp/bin/Debug/net10.0/RagApp.dll",
+      "args": ["students"],
+      "cwd": "${workspaceFolder}/dotnet",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to Student MCP server",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}"
+    }
+  ]
+}

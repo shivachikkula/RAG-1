@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "MCP server (stdio)": {
+      "commandName": "Project"
+    },
+    "Interactive console": {
+      "commandName": "Project",
+      "commandLineArgs": "--console"
+    },
+    "Interactive console (show every MCP message)": {
+      "commandName": "Project",
+      "commandLineArgs": "--console --verbose"
+    },
+    "Wait for debugger": {
+      "commandName": "Project",
+      "commandLineArgs": "--wait-for-debugger"
+    }
+  }
+}
