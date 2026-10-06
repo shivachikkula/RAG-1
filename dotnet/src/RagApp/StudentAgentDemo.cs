@@ -23,7 +23,7 @@ internal static class StudentAgentDemo
         {
             Name = "student-mcp",
             Command = "dotnet",
-            Arguments = ["run", "--project", project],
+            Arguments = ["run", "--project", project, "--no-launch-profile"],  // plain stdio server, whatever the IDE profiles say
             StandardErrorLines = _ => { },  // the server's own logs; hide them
         }));
 

@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+
 namespace StudentMcpServer.Storage;
 
 public sealed record StudentFile(string StudentId, string FileName, long SizeBytes, DateTime LastModifiedUtc);
@@ -7,8 +10,10 @@ public sealed record StudentFile(string StudentId, string FileName, long SizeByt
 /// notes, assignment drafts). This reads from a local folder; the same shape works for cloud
 /// storage like Azure Blob Storage, with one container folder per student.
 /// </summary>
-public sealed class StudentFileStore(string rootPath)
+public sealed class StudentFileStore(string rootPath, ILogger<StudentFileStore>? logger = null)
 {
+    private readonly ILogger _logger = logger ?? NullLogger<StudentFileStore>.Instance;
+
     private static readonly HashSet<string> AllowedExtensions = [".md", ".txt", ".csv", ".json"];
     private const long MaxReadBytes = 256 * 1024;
 
@@ -27,6 +32,22 @@ public sealed class StudentFileStore(string rootPath)
 
     /// <summary>Reads one file. Throws <see cref="FileAccessException"/> for anything not allowed.</summary>
     public string ReadFile(string studentId, string fileName)
+    {
+        try
+        {
+            var text = ReadFileUnchecked(studentId, fileName);
+            _logger.LogDebug("Read {FileName} for {StudentId} ({Length} chars)", fileName, studentId, text.Length);
+            return text;
+        }
+        catch (FileAccessException ex)
+        {
+            // Refusals are worth seeing in the logs: they may be a confused model or a probing attempt.
+            _logger.LogWarning("Refused file read for {StudentId}/{FileName}: {Reason}", studentId, fileName, ex.Message);
+            throw;
+        }
+    }
+
+    private string ReadFileUnchecked(string studentId, string fileName)
     {
         var folder = StudentFolder(studentId);
         var fullPath = Path.GetFullPath(Path.Combine(folder, fileName));

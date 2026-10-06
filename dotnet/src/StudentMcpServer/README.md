@@ -130,7 +130,8 @@ claude mcp add student-mcp -- dotnet <path>
 
 ```
 StudentMcpServer/
-├── Program.cs                     starts the server on stdin/stdout
+├── Program.cs                     starts the server on stdin/stdout (or --console)
+├── McpConsole.cs                  the interactive test console
 ├── StudentServerSetup.cs          registers data sources, tools, resources, prompts
 ├── Data/StudentDatabase.cs        SQLite: tables, sample data, queries, GPA
 ├── Storage/StudentFileStore.cs    reads student folders safely
@@ -173,6 +174,17 @@ The three sources sit behind small classes, so you can swap each one without tou
 - **File storage:** point `StudentFileStore` at Azure Blob Storage or S3, with one folder per student.
 - **External API:** `TextbookApiClient` shows the pattern (typed `HttpClient`, timeout, error
   handling) for calling any web API.
+
+## Testing and debugging
+
+See **[TESTING-AND-DEBUGGING.md](TESTING-AND-DEBUGGING.md)** for automated tests, an interactive
+console (`--console`), breakpoints in VS Code and Visual Studio, debugging while Claude uses the
+server (`--wait-for-debugger`), logs, and common problems. The quickest check:
+
+```bash
+dotnet run --project src/StudentMcpServer -- --console
+mcp> call get_student studentId=S1001
+```
 
 ## Tests
 
